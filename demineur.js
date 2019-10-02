@@ -39,9 +39,9 @@ class Nombre extends Cellule{
 //Classe Démineur qui contient des cellule : soit des mines soit des nombres
 class Démineur{
 	constructor(){
-		this.gridCreator();
 		this.win = false;
 		this.loose = false;
+		this.gridCreator();
 	}
 
 	//Test de création de tableau aléatoirement de taille saisi par l'utilisateur
@@ -133,146 +133,140 @@ class Démineur{
 			var ligne = grid[i];
 			for (var j = 0; j < ligne.length; j++) {
 				var currentCel = ligne[j];
-				if(typeof(currentCel.value) !== "number"){ //ajout de 1 tout autour d'une mine si la case existe et si c'est un nombre
-					this.win = true;
-					if(i == 0) {  //coté haut
-					  if (j == 0) {  //angle haut a gauche
-					    if(typeof(grid[i+1][j]) === 'number'){
-					      grid[i+1][j].value=grid[i+1][j].value+1;
+				if(currentCel.value == "M"){ //je cherche les mine
+					if (i == 0) { //coté haut -- reprise de la fonction récursive de découverte des 0 adjacents
+					  if (j == 0) { //angle haut a gauche
+					    //dans toute ces fonction, je regarde si autour des mine ce sont des nombres et si oui je les incrémentent de 1
+					    if (typeof(grid[i + 1][j].value) === 'number') {
+					      grid[i + 1][j].value++;
 					    }
-					    if(typeof(grid[i+1][j+1]) === 'number'){
-					      grid[i+1][j+1].value=grid[i+1][j+1].value+1;
+					    if (typeof(grid[i + 1][j + 1].value) === 'number') {
+					      grid[i + 1][j + 1].value++;
 					    }
-					    if(typeof(grid[i][j+1]) === 'number'){
-					      grid[i][j+1].value=grid[i][j+1].value+1;
+					    if (typeof(grid[i][j + 1].value) === 'number') {
+					      grid[i][j + 1].value++;
 					    }
-					  } else if (j == this.xMax) {  //angle haut a droite
-					      if(typeof(grid[i+1][j]) === 'number'){
-					        grid[i+1][j].value=grid[i+1][j].value+1;
-					      }
-					      if(typeof(grid[i+1][j-1]) === 'number'){
-					        grid[i+1][j-1].value=grid[i+1][j-1].value+1;
-					      }
-					      if(typeof(grid[i][j-1]) === 'number'){
-					        grid[i][j-1].value=grid[i][j-1].value+1;
-					      }
-					  }
-					  else{
-					    if(typeof(grid[i+1][j-1]) === 'number'){
-					      grid[i+1][j-1].value=grid[i+1][j-1].value+1;
+					  } else if (j == this.xMax) { //angle haut a droite
+					    if (typeof(grid[i + 1][j].value) === 'number') {
+					      grid[i + 1][j].value++;
 					    }
-					    if(typeof(grid[i+1][j]) === 'number'){
-					      grid[i+1][j].value=grid[i+1][j].value+1;
+					    if (typeof(grid[i + 1][j - 1].value) === 'number') {
+					      grid[i + 1][j - 1].value++;
 					    }
-					    if(typeof(grid[i+1][j+1]) === 'number'){
-					      grid[i+1][j+1].value=grid[i+1][j+1].value+1;
+					    if (typeof(grid[i][j - 1].value) === 'number') {
+					      grid[i][j - 1].value++;
 					    }
-					    if(typeof(grid[i][j+1]) === 'number'){
-					      grid[i][j+1].value=grid[i][j+1].value+1;
+					  } else {
+					    if (typeof(grid[i + 1][j - 1].value) === 'number') {
+					      grid[i + 1][j - 1].value++;
 					    }
-					    if(typeof(grid[i][j-1]) === 'number'){
-					      grid[i][j-1].value=grid[i][j-1].value+1;
+					    if (typeof(grid[i + 1][j].value) === 'number') {
+					      grid[i + 1][j].value++;
 					    }
-					  }
-					}
-					else if(i == this.yMax) {  //coté bas
-					  if (j == 0) {  //angle bas a gauche
-					    if(typeof(grid[i][j+1]) === 'number'){
-					      grid[i][j+1].value=grid[i][j+1].value+1;
+					    if (typeof(grid[i + 1][j + 1].value) === 'number') {
+					      grid[i + 1][j + 1].value++;
 					    }
-					    if(typeof(grid[i-1][j+1]) === 'number'){
-					      grid[i-1][j+1].value=grid[i-1][j+1].value+1;
+					    if (typeof(grid[i][j + 1].value) === 'number') {
+					      grid[i][j + 1].value++;
 					    }
-					    if(typeof(grid[i-1][j]) === 'number'){
-					      grid[i-1][j].value=grid[i-1][j].value+1;
-					    }
-					  } else if (j == this.xMax) {  //angle bas a droite
-					    if(typeof(grid[i-1][j]) === 'number'){
-					      grid[i-1][j].value=grid[i-1][j].value+1;
-					    }
-					    if(typeof(grid[i-1][j-1]) === 'number'){
-					      grid[i-1][j-1].value=grid[i-1][j-1].value+1;
-					    }
-					    if(typeof(grid[i][j-1]) === 'number'){
-					      grid[i][j-1].value=grid[i][j-1].value+1;
+					    if (typeof(grid[i][j - 1].value) === 'number') {
+					      grid[i][j - 1].value++;
 					    }
 					  }
-					  else{
-					    if(typeof(grid[i][j+1]) === 'number'){
-					      grid[i][j+1].value=grid[i][j+1].value+1;
+					} else if (i == this.yMax) { //coté bas
+					  if (j == 0) { //angle bas a gauche
+					    if (typeof(grid[i][j + 1].value) === 'number') {
+					      grid[i][j + 1].value++;
 					    }
-					    if(typeof(grid[i-1][j+1]) === 'number'){
-					      grid[i-1][j+1].value=grid[i-1][j+1].value+1;
+					    if (typeof(grid[i - 1][j + 1].value) === 'number') {
+					      grid[i - 1][j + 1].value++;
 					    }
-					    if(typeof(grid[i-1][j]) === 'number'){
-					      grid[i-1][j].value=grid[i-1][j].value+1;
+					    if (typeof(grid[i - 1][j].value) === 'number') {
+					      grid[i - 1][j].value++;
 					    }
-					    if(typeof(grid[i-1][j-1]) === 'number'){
-					      grid[i-1][j-1].value=grid[i-1][j-1].value+1;
+					  } else if (j == this.xMax) { //angle bas a droite
+					    if (typeof(grid[i - 1][j].value) === 'number') {
+					      grid[i - 1][j].value++;
 					    }
-					    if(typeof(grid[i][j-1]) === 'number'){
-					      grid[i][j-1].value=grid[i][j-1].value+1;
+					    if (typeof(grid[i - 1][j - 1].value) === 'number') {
+					      grid[i - 1][j - 1].value++;
+					    }
+					    if (typeof(grid[i][j - 1].value) === 'number') {
+					      grid[i][j - 1].value++;
+					    }
+					  } else {
+					    if (typeof(grid[i][j + 1].value) === 'number') {
+					      grid[i][j + 1].value++;
+					    }
+					    if (typeof(grid[i - 1][j + 1].value) === 'number') {
+					      grid[i - 1][j + 1].value++;
+					    }
+					    if (typeof(grid[i - 1][j].value) === 'number') {
+					      grid[i - 1][j].value++;
+					    }
+					    if (typeof(grid[i - 1][j - 1].value) === 'number') {
+					      grid[i - 1][j - 1].value++;
+					    }
+					    if (typeof(grid[i][j - 1].value) === 'number') {
+					      grid[i][j - 1].value++;
 					    }
 					  }
-					}
-					else if(j == 0) {  //coté gauche
-					  if(typeof(grid[i+1][j]) === 'number'){
-					    grid[i+1][j].value=grid[i+1][j].value+1;
+					} else if (j == 0) { //coté gauche
+					  if (typeof(grid[i + 1][j].value) === 'number') {
+					    grid[i + 1][j].value++;
 					  }
-					  if(typeof(grid[i+1][j+1]) === 'number'){
-					    grid[i+1][j+1].value=grid[i+1][j+1].value+1;
+					  if (typeof(grid[i + 1][j + 1].value) === 'number') {
+					    grid[i + 1][j + 1].value++;
 					  }
-					  if(typeof(grid[i][j+1]) === 'number'){
-					    grid[i][j+1].value=grid[i][j+1].value+1;
+					  if (typeof(grid[i][j + 1].value) === 'number') {
+					    grid[i][j + 1].value++;
 					  }
-					  if(typeof(grid[i-1][j+1]) === 'number'){
-					    grid[i-1][j+1].value=grid[i-1][j+1].value+1;
+					  if (typeof(grid[i - 1][j + 1].value) === 'number') {
+					    grid[i - 1][j + 1].value++;
 					  }
-					  if(typeof(grid[i-1][j]) === 'number'){
-					    grid[i-1][j].value=grid[i-1][j].value+1;
+					  if (typeof(grid[i - 1][j].value) === 'number') {
+					    grid[i - 1][j].value++;
 					  }
-					}
-					else if(j == this.xMax) {  //coté haut
-					  if(typeof(grid[i+1][j]) === 'number'){
-					    grid[i+1][j].value=grid[i+1][j].value+1;
+					} else if (j == this.xMax) { //coté haut
+					  if (typeof(grid[i + 1][j].value) === 'number') {
+					    grid[i + 1][j].value++;
 					  }
-					  if(typeof(grid[i-1][j]) === 'number'){
-					    grid[i-1][j].value=grid[i-1][j].value+1;
+					  if (typeof(grid[i - 1][j].value) === 'number') {
+					    grid[i - 1][j].value++;
 					  }
-					  if(typeof(grid[i-1][j-1]) === 'number'){
-					    grid[i-1][j-1].value=grid[i-1][j-1].value+1;
+					  if (typeof(grid[i - 1][j - 1].value) === 'number') {
+					    grid[i - 1][j - 1].value++;
 					  }
-					  if(typeof(grid[i][j-1]) === 'number'){
-					    grid[i][j-1].value=grid[i][j-1].value+1;
+					  if (typeof(grid[i][j - 1].value) === 'number') {
+					    grid[i][j - 1].value++;
 					  }
-					  if(typeof(grid[i+1][j-1]) === 'number'){
-					    grid[i+1][j-1].value=grid[i+1][j-1].value+1;
+					  if (typeof(grid[i + 1][j - 1].value) === 'number') {
+					    grid[i + 1][j - 1].value++;
 					  }
-					}
-					else {  //milieu de la grille
-					  if(typeof(grid[i+1][j]) === 'number'){
-					    grid[i+1][j].value=grid[i+1][j].value+1;
+					} else { //milieu de la grille
+					  if (typeof(grid[i + 1][j].value) === 'number') {
+					    grid[i + 1][j].value++;
 					  }
-					  if(typeof(grid[i+1][j+1]) === 'number'){
-					    grid[i+1][j+1].value=grid[i+1][j+1].value+1;
+					  if (typeof(grid[i + 1][j + 1].value) === 'number') {
+					    grid[i + 1][j + 1].value++;
 					  }
-					  if(typeof(grid[i][j+1]) === 'number'){
-					    grid[i][j+1].value=grid[i][j+1].value+1;
+					  if (typeof(grid[i][j + 1].value) === 'number') {
+					    grid[i][j + 1].value++;
 					  }
-					  if(typeof(grid[i-1][j+1]) === 'number'){
-					    grid[i-1][j+1].value=grid[i-1][j+1].value+1;
+					  if (typeof(grid[i - 1][j + 1].value) === 'number') {
+					    grid[i - 1][j + 1].value++;
 					  }
-					  if(typeof(grid[i-1][j]) === 'number'){
-					    grid[i-1][j].value=grid[i-1][j].value+1;
+					  if (typeof(grid[i - 1][j].value) === 'number') {
+					    grid[i - 1][j].value++;
 					  }
-					  if(typeof(grid[i-1][j-1]) === 'number'){
-					    grid[i-1][j-1].value=grid[i-1][j-1].value+1;
+					  if (typeof(grid[i - 1][j - 1].value) === 'number') {
+					    grid[i - 1][j - 1].value++;
 					  }
-					  if(typeof(grid[i][j-1]) === 'number'){
-					    grid[i][j-1].value=grid[i][j-1].value+1;
+					  if (typeof(grid[i][j - 1].value) === 'number') {
+					    grid[i][j - 1].value++;
 					  }
-					  if(typeof(grid[i+1][j-1]) === 'number'){
-					    grid[i+1][j-1].value=grid[i+1][j-1].value+1;
+					  if (typeof(grid[i + 1][j - 1].value) === 'number') {
+					    grid[i + 1][j - 1].value++;
 					  }
 					}
 				}
