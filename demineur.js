@@ -42,6 +42,50 @@ class Démineur{
 		this.gridCreator();
 		this.win = false;
 		this.loose = false;
+	}
+
+	//Test de création de tableau aléatoirement de taille saisi par l'utilisateur
+	gridCreator(){
+		console.clear();
+		console.log("\n   Taille X:");
+		var	xChoice = scanf('%d');
+		console.log("\n   Taille Y:");
+		var yChoice = scanf('%d');
+		for(var i = 0; i < yChoice; i++){
+			var ligne = [];
+			for (var j = 0; j < xChoice; j++) {
+				ligne.push(0);
+			}
+			grid.push(ligne);
+		}
+		//grid créée de la taille voulue rempli de 0
+		var difficultyValid = false;
+		while (!difficultyValid) {
+			console.log("\n   Niveau de difficulté: 1 - 2 - 3");
+			var	difficulty = scanf('%d');
+			if(difficulty > 0 && difficulty <=3){ // gestion du nombre de mine à mettre en fonction de la difficulté
+				var numberOfMine;
+				if(difficulty == 1){
+					numberOfMine = Math.ceil(xChoice * yChoice / 15);
+				}
+				else if(difficulty == 2){
+					numberOfMine = Math.ceil(xChoice * yChoice / 10);
+				}
+				else if(difficulty == 3){
+					numberOfMine = Math.ceil(xChoice * yChoice / 5);
+				}
+				this.remplissageGrid(); //changement des valeur en cellule nombre ou mine
+				for(var n = 0; n < numberOfMine; n++){// ajout des mines en fonction du nombre de mine calculé au dessus
+					var xRandom = Math.floor(Math.random() * xChoice);
+					var yRandom = Math.floor(Math.random() * yChoice);
+					grid[yRandom][xRandom].value="M";
+				}
+				difficultyValid = true;
+			}
+		}
+	}
+
+	remplissageGrid(){
 		//Définition des point x et y max
 		this.yMax = grid.length - 1;
 		var ligne = grid[0];
@@ -59,23 +103,6 @@ class Démineur{
 				 ligne[j] = new Mine();
 				}
 			}
-		}
-	}
-
-	//Test de création de tableau aléatoirement de taille saisi par l'utilisateur
-	gridCreator(){
-		console.log("\n   Taille X:");
-		var	xChoice = scanf('%d');
-		console.log("\n   Taille Y:");
-		var yChoice = scanf('%d');
-		for(var i = 0; i < yChoice; i++){
-			var ligne = [];
-			for (var j = 0; j < xChoice; j++) {
-				ligne.push(0);
-			}
-			var randomValue = Math.floor(Math.random() * xChoice) 
-			ligne[randomValue] = "M"
-			grid.push(ligne);
 		}
 	}
 
