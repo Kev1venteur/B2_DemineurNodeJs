@@ -47,10 +47,31 @@ class Démineur{
 	//Test de création de tableau aléatoirement de taille saisi par l'utilisateur
 	gridCreator(){
 		console.clear();
-		console.log("\n   Taille X:");
-		var	xChoice = scanf('%d');
-		console.log("\n   Taille Y:");
-		var yChoice = scanf('%d');
+		var xMaxValid = false;
+		var yMaxValid = false;
+		var xChoice;
+		var yChoice;
+		while (!xMaxValid) { //Vérification du X compris entre 0 et 20
+			console.log("\n   Taille X: (entre 1 et 20)");
+			xChoice = scanf('%d');
+			if (xChoice <= 20 && xChoice > 0) {
+				xMaxValid = true;
+			}
+			else {
+				console.log("\n   Veuillez rentrer une taille X entre 0 et 20");
+			}
+		}
+		while (!yMaxValid) { //Vérification du Y compris entre 0 et 20
+			console.log("\n   Taille Y: (entre 1 et 20)");
+			yChoice = scanf('%d');
+			if (yChoice <= 20 && yChoice > 0) {
+				yMaxValid = true;
+			}
+			else {
+				console.log("\n   Veuillez rentrer une taille Y entre 0 et 20");
+			}
+		}
+		//remplissage du tableau de 0
 		for(var i = 0; i < yChoice; i++){
 			var ligne = [];
 			for (var j = 0; j < xChoice; j++) {
@@ -58,7 +79,7 @@ class Démineur{
 			}
 			grid.push(ligne);
 		}
-		//grid créée de la taille voulue rempli de 0
+		//Remplacement des 0 par des cellule contenant 0
 		var difficultyValid = false;
 		while (!difficultyValid) {
 			console.log("\n   Niveau de difficulté: 1 - 2 - 3");
@@ -66,10 +87,10 @@ class Démineur{
 			if(difficulty > 0 && difficulty <=3){ // gestion du nombre de mine à mettre en fonction de la difficulté
 				var numberOfMine;
 				if(difficulty == 1){
-					numberOfMine = Math.ceil(xChoice * yChoice / 15);
+					numberOfMine = Math.ceil(xChoice * yChoice / 15); // 15 fois moins de mines que de case
 				}
 				else if(difficulty == 2){
-					numberOfMine = Math.ceil(xChoice * yChoice / 10);
+					numberOfMine = Math.ceil(xChoice * yChoice / 10); //arrondi à l'entier supérieur
 				}
 				else if(difficulty == 3){
 					numberOfMine = Math.ceil(xChoice * yChoice / 5);
@@ -167,7 +188,6 @@ class Démineur{
 		else if(grid[y][x].value!=0 && !grid[y][x].isRevealed && !grid[y][x].isFlagged){ // Si case autre que 0 et pas révélée et pas flaggée
 			grid[y][x].isRevealed=true;
 		}
-		this.display();
 	}
 
 	test0(x, y){ 	//Révèle les case adjacentes quand '0'
