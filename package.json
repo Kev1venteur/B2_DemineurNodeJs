@@ -1,0 +1,17 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "chien_de_race.js",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "nodejs-scanf": "^1.1.0",
+    "scanf": "^1.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
