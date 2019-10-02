@@ -1,27 +1,18 @@
 var scanf = require('scanf');
 var colors = require('colors');
 
-
-var grid2 = [1,5];
-
-for(var i = 0; i < 6; i++){
-	var ligne2 = [1,5];
-	for(var i = 0; i < 6; i++){
-		var ligne2.push(i);
-	}
-	var grid2.push(ligne2);
-}
-
-
-
-var grid = [
-	[0, 1, 1, 1, 0, 0],
-	[0, 2, 'M', 2, 0, 0],
-	[0, 2, 'M', 2, 0, 0],
-	[0, 1, 1, 1, 0, 0],
-	[0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0],
-];
+// var grid = [
+// 	[0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+// 	[0, 2, 'M', 2, 0, 0, 0, 0, 0, 0],
+// 	[0, 2, 'M', 2, 0, 0, 0, 0, 0, 0],
+// 	[0, 1, 1, 1, 0, 0, 0, 1, 1, 1],
+// 	[0, 0, 0, 0, 0, 1, 1, 1, "M", 1],
+// 	[0, 0, 0, 0, 0, 1, "M", 3, 2, 1],
+// 	[0, 0, 0, 0, 0, 1, 1, 2, "M", 1],
+// 	[0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+// ];
+var grid = [];
 
 class Cellule{
 	constructor(){
@@ -48,6 +39,7 @@ class Nombre extends Cellule{
 //Classe Démineur qui contient des cellule : soit des mines soit des nombres
 class Démineur{
 	constructor(){
+		this.gridCreator();
 		this.win = false;
 		this.loose = false;
 		//Définition des point x et y max
@@ -70,6 +62,21 @@ class Démineur{
 		}
 	}
 
+	//Test de création de tableau aléatoirement de taille saisi par l'utilisateur
+	gridCreator(){
+		console.log("\n   Taille X:");
+		var	xChoice = scanf('%d');
+		console.log("\n   Taille Y:");
+		var yChoice = scanf('%d');
+		for(var i = 0; i < yChoice; i++){
+			var ligne = [];
+			for (var j = 0; j < xChoice; j++) {
+				ligne.push(0);
+			}
+			grid.push(ligne);
+		}
+	}
+
 	display(){
 		console.clear();
 		var print = "\n\n\n";
@@ -78,7 +85,7 @@ class Démineur{
 			for (var j = 0; j < ligne.length; j++) { //fonction de décomposition lignes en cellules
 				var currentCel = ligne[j];
 				if (currentCel.isFlagged){
-					print = print + "  [ƒ]";
+					print = print + "  [ƒ]".cyan;
 				}
 				else if (currentCel.isRevealed) {
 					if(currentCel.value == 0){
