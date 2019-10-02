@@ -321,8 +321,10 @@ class Démineur{
 			grid[y][x].isFlagged=false;
 		}
 		else {
-			//Sinon on flag
-			grid[y][x].isFlagged=true;
+			//Sinon on flag si la case est pas révélée
+			if(!grid[y][x].isRevealed){
+				grid[y][x].isFlagged=true;
+			}
 		}
 		this.display();
 	}
