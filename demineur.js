@@ -118,7 +118,7 @@ class Démineur{
 			for (var j = 0; j < ligne.length; j++) {
 				var currentCel = ligne[j];
 				//Test si c'est un nombre ou une mine
-				if(typeof(currentCel) == 'number' ){
+				if(typeof(currentCel) === 'number' ){
 				 ligne[j] = new Nombre(currentCel);
 				}
 				else{
@@ -129,35 +129,151 @@ class Démineur{
 	}
 
 	ajoutPointAutourMine(){
-		var ligne = grid[0];
 		for (var i = 0; i < grid.length; i++) {
 			var ligne = grid[i];
 			for (var j = 0; j < ligne.length; j++) {
 				var currentCel = ligne[j];
-				if(typeof(currentCel) === 'string'){ //ajout de 1 tout autour d'une mine si la case existe et si c'est un nombre
-					if(typeof(grid[i+1][j]) !== 'undefined' && typeof(grid[i+1][j]) === 'number'){
-						grid[i+1][j].value=grid[i+1][j].value+1;
+				if(typeof(currentCel.value) !== "number"){ //ajout de 1 tout autour d'une mine si la case existe et si c'est un nombre
+					this.win = true;
+					if(i == 0) {  //coté haut
+					  if (j == 0) {  //angle haut a gauche
+					    if(typeof(grid[i+1][j]) === 'number'){
+					      grid[i+1][j].value=grid[i+1][j].value+1;
+					    }
+					    if(typeof(grid[i+1][j+1]) === 'number'){
+					      grid[i+1][j+1].value=grid[i+1][j+1].value+1;
+					    }
+					    if(typeof(grid[i][j+1]) === 'number'){
+					      grid[i][j+1].value=grid[i][j+1].value+1;
+					    }
+					  } else if (j == this.xMax) {  //angle haut a droite
+					      if(typeof(grid[i+1][j]) === 'number'){
+					        grid[i+1][j].value=grid[i+1][j].value+1;
+					      }
+					      if(typeof(grid[i+1][j-1]) === 'number'){
+					        grid[i+1][j-1].value=grid[i+1][j-1].value+1;
+					      }
+					      if(typeof(grid[i][j-1]) === 'number'){
+					        grid[i][j-1].value=grid[i][j-1].value+1;
+					      }
+					  }
+					  else{
+					    if(typeof(grid[i+1][j-1]) === 'number'){
+					      grid[i+1][j-1].value=grid[i+1][j-1].value+1;
+					    }
+					    if(typeof(grid[i+1][j]) === 'number'){
+					      grid[i+1][j].value=grid[i+1][j].value+1;
+					    }
+					    if(typeof(grid[i+1][j+1]) === 'number'){
+					      grid[i+1][j+1].value=grid[i+1][j+1].value+1;
+					    }
+					    if(typeof(grid[i][j+1]) === 'number'){
+					      grid[i][j+1].value=grid[i][j+1].value+1;
+					    }
+					    if(typeof(grid[i][j-1]) === 'number'){
+					      grid[i][j-1].value=grid[i][j-1].value+1;
+					    }
+					  }
 					}
-					else if(typeof(grid[i-1][j]) !== 'undefined' && typeof(grid[i-1][j]) === 'number'){
-						grid[i-1][j].value=grid[i-1][j].value+1;
+					else if(i == this.yMax) {  //coté bas
+					  if (j == 0) {  //angle bas a gauche
+					    if(typeof(grid[i][j+1]) === 'number'){
+					      grid[i][j+1].value=grid[i][j+1].value+1;
+					    }
+					    if(typeof(grid[i-1][j+1]) === 'number'){
+					      grid[i-1][j+1].value=grid[i-1][j+1].value+1;
+					    }
+					    if(typeof(grid[i-1][j]) === 'number'){
+					      grid[i-1][j].value=grid[i-1][j].value+1;
+					    }
+					  } else if (j == this.xMax) {  //angle bas a droite
+					    if(typeof(grid[i-1][j]) === 'number'){
+					      grid[i-1][j].value=grid[i-1][j].value+1;
+					    }
+					    if(typeof(grid[i-1][j-1]) === 'number'){
+					      grid[i-1][j-1].value=grid[i-1][j-1].value+1;
+					    }
+					    if(typeof(grid[i][j-1]) === 'number'){
+					      grid[i][j-1].value=grid[i][j-1].value+1;
+					    }
+					  }
+					  else{
+					    if(typeof(grid[i][j+1]) === 'number'){
+					      grid[i][j+1].value=grid[i][j+1].value+1;
+					    }
+					    if(typeof(grid[i-1][j+1]) === 'number'){
+					      grid[i-1][j+1].value=grid[i-1][j+1].value+1;
+					    }
+					    if(typeof(grid[i-1][j]) === 'number'){
+					      grid[i-1][j].value=grid[i-1][j].value+1;
+					    }
+					    if(typeof(grid[i-1][j-1]) === 'number'){
+					      grid[i-1][j-1].value=grid[i-1][j-1].value+1;
+					    }
+					    if(typeof(grid[i][j-1]) === 'number'){
+					      grid[i][j-1].value=grid[i][j-1].value+1;
+					    }
+					  }
 					}
-					else if(typeof(grid[i][j+1]) !== 'undefined' && typeof(grid[i][j+1]) === 'number'){
-						grid[i][j+1].value=grid[i][j+1].value+1;
+					else if(j == 0) {  //coté gauche
+					  if(typeof(grid[i+1][j]) === 'number'){
+					    grid[i+1][j].value=grid[i+1][j].value+1;
+					  }
+					  if(typeof(grid[i+1][j+1]) === 'number'){
+					    grid[i+1][j+1].value=grid[i+1][j+1].value+1;
+					  }
+					  if(typeof(grid[i][j+1]) === 'number'){
+					    grid[i][j+1].value=grid[i][j+1].value+1;
+					  }
+					  if(typeof(grid[i-1][j+1]) === 'number'){
+					    grid[i-1][j+1].value=grid[i-1][j+1].value+1;
+					  }
+					  if(typeof(grid[i-1][j]) === 'number'){
+					    grid[i-1][j].value=grid[i-1][j].value+1;
+					  }
 					}
-					else if(typeof(grid[i][j-1]) !== 'undefined' && typeof(grid[i][j-1]) === 'number'){
-						grid[i][j-1].value=grid[i][j-1].value+1;
+					else if(j == this.xMax) {  //coté haut
+					  if(typeof(grid[i+1][j]) === 'number'){
+					    grid[i+1][j].value=grid[i+1][j].value+1;
+					  }
+					  if(typeof(grid[i-1][j]) === 'number'){
+					    grid[i-1][j].value=grid[i-1][j].value+1;
+					  }
+					  if(typeof(grid[i-1][j-1]) === 'number'){
+					    grid[i-1][j-1].value=grid[i-1][j-1].value+1;
+					  }
+					  if(typeof(grid[i][j-1]) === 'number'){
+					    grid[i][j-1].value=grid[i][j-1].value+1;
+					  }
+					  if(typeof(grid[i+1][j-1]) === 'number'){
+					    grid[i+1][j-1].value=grid[i+1][j-1].value+1;
+					  }
 					}
-					else if(typeof(grid[i+1][j+1]) !== 'undefined' && typeof(grid[i+1][j+1]) === 'number'){
-						grid[i+1][j+1].value=grid[i+1][j+1].value+1;
-					}
-					else if(typeof(grid[i-1][j-1]) !== 'undefined' && typeof(grid[i-1][j-1]) === 'number'){
-						grid[i-1][j-1].value=grid[i-1][j-1].value+1;
-					}
-					else if(typeof(grid[i-1][j+1]) !== 'undefined' && typeof(grid[i-1][j+1]) === 'number'){
-						grid[i-1][j+1].value=grid[i-1][j+1].value+1;
-					}
-					else if(typeof(grid[i+1][j-1]) !== 'undefined' && typeof(grid[i+1][j-1]) === 'number'){
-						grid[i+1][j-1].value=grid[i+1][j-1].value+1;
+					else {  //milieu de la grille
+					  if(typeof(grid[i+1][j]) === 'number'){
+					    grid[i+1][j].value=grid[i+1][j].value+1;
+					  }
+					  if(typeof(grid[i+1][j+1]) === 'number'){
+					    grid[i+1][j+1].value=grid[i+1][j+1].value+1;
+					  }
+					  if(typeof(grid[i][j+1]) === 'number'){
+					    grid[i][j+1].value=grid[i][j+1].value+1;
+					  }
+					  if(typeof(grid[i-1][j+1]) === 'number'){
+					    grid[i-1][j+1].value=grid[i-1][j+1].value+1;
+					  }
+					  if(typeof(grid[i-1][j]) === 'number'){
+					    grid[i-1][j].value=grid[i-1][j].value+1;
+					  }
+					  if(typeof(grid[i-1][j-1]) === 'number'){
+					    grid[i-1][j-1].value=grid[i-1][j-1].value+1;
+					  }
+					  if(typeof(grid[i][j-1]) === 'number'){
+					    grid[i][j-1].value=grid[i][j-1].value+1;
+					  }
+					  if(typeof(grid[i+1][j-1]) === 'number'){
+					    grid[i+1][j-1].value=grid[i+1][j-1].value+1;
+					  }
 					}
 				}
 			}
@@ -220,7 +336,7 @@ class Démineur{
 	click(x, y){
 		if(grid[y][x].value==0 && !grid[y][x].isRevealed && !grid[y][x].isFlagged){ // Si case 0 et pas révélée et pas flaggée
 			grid[y][x].isRevealed=true;
-			jeu.test0(x, y);
+			this.test0(x, y);
 		}
 		else if(grid[y][x].value!=0 && !grid[y][x].isRevealed && !grid[y][x].isFlagged){ // Si case autre que 0 et pas révélée et pas flaggée
 			grid[y][x].isRevealed=true;
@@ -233,7 +349,7 @@ class Démineur{
           this.click(x, y+1);
           this.click(x+1, y+1);
           this.click(x+1, y);
-      } else if (x == jeu.xMax) {  //angle haut a droite
+      } else if (x == this.xMax) {  //angle haut a droite
           this.click(x, y+1);
           this.click(x-1, y+1);
           this.click(x-1, y);
@@ -246,12 +362,12 @@ class Démineur{
           this.click(x-1, y);
       }
   	}
-	  else if(y == jeu.yMax) {  //coté bas
+	  else if(y == this.yMax) {  //coté bas
       if (x == 0) {  //angle bas a gauche
           this.click(x+1, y);
           this.click(x+1, y-1);
           this.click(x, y-1);
-      } else if (x == jeu.xMax) {  //angle bas a droite
+      } else if (x == this.xMax) {  //angle bas a droite
           this.click(x, y-1);
           this.click(x-1, y-1);
           this.click(x-1, y);
@@ -271,7 +387,7 @@ class Démineur{
 	      this.click(x+1, y-1);
 	      this.click(x, y-1);
 	  }
-	  else if(x == jeu.xMax) {  //coté haut
+	  else if(x == this.xMax) {  //coté haut
 	      this.click(x, y+1);
 	      this.click(x, y-1);
 	      this.click(x-1, y-1);
@@ -355,7 +471,7 @@ class Démineur{
 	}
 
 	play(){
-		while(!jeu.win && !jeu.loose){
+		while(!this.win && !this.loose){
 			this.display();
 			var choixValide = false;
 			while(!choixValide){ //Vérification de la validité du choix -> 1 ou 2 sinon on boucle
