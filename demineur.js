@@ -1,6 +1,19 @@
 var scanf = require('scanf');
 var colors = require('colors');
 
+
+var grid2 = [1,5];
+
+for(var i = 0; i < 6; i++){
+	var ligne2 = [1,5];
+	for(var i = 0; i < 6; i++){
+		var ligne2.push(i);
+	}
+	var grid2.push(ligne2);
+}
+
+
+
 var grid = [
 	[0, 1, 1, 1, 0, 0],
 	[0, 2, 'M', 2, 0, 0],
@@ -41,7 +54,7 @@ class Démineur{
 		this.yMax = grid.length - 1;
 		var ligne = grid[0];
 		this.xMax = ligne.length - 1;
-		//Assignation des valeur au cellules
+		//Assignation des cellules dans le grid
 		for (var i = 0; i < grid.length; i++) {
 			var ligne = grid[i];
 			for (var j = 0; j < ligne.length; j++) {
@@ -100,9 +113,11 @@ class Démineur{
 
 	flag(x, y){
 		if(grid[y][x].isFlagged){
+			//Si on flag une case déjà flaggée, alors on déflag
 			grid[y][x].isFlagged=false;
 		}
 		else {
+			//Sinon on flag
 			grid[y][x].isFlagged=true;
 		}
 		this.display();
@@ -170,7 +185,7 @@ class Démineur{
 	      this.click(x-1, y);
 	      this.click(x-1, y+1);
 	  }
-		else {  //milieu du tab
+		else {  //milieu de la grille
       this.click(x, y+1);
       this.click(x+1, y+1);
       this.click(x+1, y);
@@ -183,6 +198,7 @@ class Démineur{
 	}
 
 	testWin(){
+		//Fonction de test si le jeu est gangné ou perdu
 		var validCel = true;
 		var mineRevealed = false;
 		for (var i = 0; i < grid.length; i++) { // fonction de décomposition grid en lignes
@@ -198,17 +214,19 @@ class Démineur{
 			}
 		}
 		if(validCel){
+			//Si validCel n'est pas passé à false alors c'est gagné
 			this.win = true;
 			console.log("\n\n             Gagné\n\n");
 		}
 		else if(mineRevealed){
+			//Si une mine a été révélée alors c'est perdu
 			this.loose = true;
 			console.log("\n\n             Perdu\n\n");
 		}
 	}
 
 	askCoordCel(){
-		//check X
+		//Vérification de X rentré par l'utilisateur
 		var coordValid = false;
 		var xInput;
 		var yInput;
@@ -222,7 +240,7 @@ class Démineur{
 				console.log("Coordonnée X Invalide");
 			}
 		}
-		//check Y
+		//Vérification de Y rentré par l'utilisateur
 		var coordValid = false;
 		while(!coordValid){
 			console.log("\n   Y:");
@@ -239,7 +257,7 @@ class Démineur{
 
 	choice(){
 		console.log("\n\n      Choix :\n\n   [1] Flagger \n   [2] Cliquer");
-		var choix = scanf('%d');
+		var choix = scanf('%d');  //On demande à l'utilisateur de rentrer un entier
 		return choix;
 	}
 
@@ -247,7 +265,7 @@ class Démineur{
 		while(!jeu.win && !jeu.loose){
 			this.display();
 			var choixValide = false;
-			while(!choixValide){
+			while(!choixValide){ //Vérification de la validité du choix -> 1 ou 2 sinon on boucle
 				var choixAction = this.choice();
 				if(choixAction == 1 || choixAction == 2){
 					choixValide = true;
@@ -257,9 +275,9 @@ class Démineur{
 				}
 			}
 			if(choixAction == 1){
-				var values = this.askCoordCel();
-				var xInput = values[0];
-				var yInput = values[1];
+				var values = this.askCoordCel(); //askCoordCel retourne un tableau avec X à l'index 0 et Y à l'index 1 -> saisi par l'utlisateur
+				var xInput = values[0];			//On décompose le tableau récupéré
+				var yInput = values[1];			//en 2 variables
 				this.flag(xInput, yInput);
 			}
 			else if(choixAction == 2){
@@ -268,16 +286,9 @@ class Démineur{
 				var yInput = values[1];
 				this.click(xInput, yInput);
 			}
-			//jeu.flag(1, 2);
-			//jeu.flag(3, 2);
-			//this.click(0, 5);
-			//this.click(2, 2);
 		}
 	}
 }
 
-var jeu = new Démineur();
-jeu.play();
-
-
-//jeu.askCoordCel();
+var jeu = new Démineur(); //On créer un démineur
+jeu.play();               //Et on joue
