@@ -73,6 +73,8 @@ class Démineur{
 			for (var j = 0; j < xChoice; j++) {
 				ligne.push(0);
 			}
+			var randomValue = Math.floor(Math.random() * xChoice) 
+			ligne[randomValue] = "M"
 			grid.push(ligne);
 		}
 	}
