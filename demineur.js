@@ -95,7 +95,7 @@ class Démineur{
 				else if(difficulty == 3){
 					numberOfMine = Math.ceil(xChoice * yChoice / 5);
 				}
-				this.remplissageGrid(); //changement des valeur en cellule nombre ou mine
+				this.remplissageCelluleGrid(); //changement des valeur en cellule nombre ou mine
 				for(var n = 0; n < numberOfMine; n++){// ajout des mines en fonction du nombre de mine calculé au dessus
 					var xRandom = Math.floor(Math.random() * xChoice);
 					var yRandom = Math.floor(Math.random() * yChoice);
@@ -104,9 +104,10 @@ class Démineur{
 				difficultyValid = true;
 			}
 		}
+		this.ajoutPointAutourMine();
 	}
 
-	remplissageGrid(){
+	remplissageCelluleGrid(){
 		//Définition des point x et y max
 		this.yMax = grid.length - 1;
 		var ligne = grid[0];
@@ -122,6 +123,42 @@ class Démineur{
 				}
 				else{
 				 ligne[j] = new Mine();
+				}
+			}
+		}
+	}
+
+	ajoutPointAutourMine(){
+		var ligne = grid[0];
+		for (var i = 0; i < grid.length; i++) {
+			var ligne = grid[i];
+			for (var j = 0; j < ligne.length; j++) {
+				var currentCel = ligne[j];
+				if(typeof(currentCel) === 'string'){ //ajout de 1 tout autour d'une mine si la case existe et si c'est un nombre
+					if(typeof(grid[i+1][j]) !== 'undefined' && typeof(grid[i+1][j]) === 'number'){
+						grid[i+1][j].value=grid[i+1][j].value+1;
+					}
+					else if(typeof(grid[i-1][j]) !== 'undefined' && typeof(grid[i-1][j]) === 'number'){
+						grid[i-1][j].value=grid[i-1][j].value+1;
+					}
+					else if(typeof(grid[i][j+1]) !== 'undefined' && typeof(grid[i][j+1]) === 'number'){
+						grid[i][j+1].value=grid[i][j+1].value+1;
+					}
+					else if(typeof(grid[i][j-1]) !== 'undefined' && typeof(grid[i][j-1]) === 'number'){
+						grid[i][j-1].value=grid[i][j-1].value+1;
+					}
+					else if(typeof(grid[i+1][j+1]) !== 'undefined' && typeof(grid[i+1][j+1]) === 'number'){
+						grid[i+1][j+1].value=grid[i+1][j+1].value+1;
+					}
+					else if(typeof(grid[i-1][j-1]) !== 'undefined' && typeof(grid[i-1][j-1]) === 'number'){
+						grid[i-1][j-1].value=grid[i-1][j-1].value+1;
+					}
+					else if(typeof(grid[i-1][j+1]) !== 'undefined' && typeof(grid[i-1][j+1]) === 'number'){
+						grid[i-1][j+1].value=grid[i-1][j+1].value+1;
+					}
+					else if(typeof(grid[i+1][j-1]) !== 'undefined' && typeof(grid[i+1][j-1]) === 'number'){
+						grid[i+1][j-1].value=grid[i+1][j-1].value+1;
+					}
 				}
 			}
 		}
