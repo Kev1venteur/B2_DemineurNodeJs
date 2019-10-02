@@ -413,7 +413,7 @@ class Démineur{
 				if (!currentCel.isRevealed && currentCel.value!="M"){
 					validCel=false;
 				}
-				else if (currentCel.isRevealed && currentCel.value=="M"){
+				if (currentCel.isRevealed && currentCel.value=="M"){
 					mineRevealed = true;
 				}
 			}
@@ -423,7 +423,7 @@ class Démineur{
 			this.win = true;
 			console.log("\n\n             Gagné\n\n");
 		}
-		else if(mineRevealed){
+		if(mineRevealed){
 			//Si une mine a été révélée alors c'est perdu
 			this.loose = true;
 			console.log("\n\n             Perdu\n\n");
@@ -491,6 +491,7 @@ class Démineur{
 				var yInput = values[1];
 				this.click(xInput, yInput);
 			}
+			this.display();
 		}
 	}
 }
