@@ -52,23 +52,23 @@ class Démineur{
 		var xChoice;
 		var yChoice;
 		while (!xMaxValid) { //Vérification du X compris entre 0 et 20
-			console.log("\n   Taille du tableau axe X: (entre 1 et 20)");
+			console.log("\n   Taille du tableau axe X: (entre 5 et 20)");
 			xChoice = scanf('%d');
-			if (xChoice <= 20 && xChoice > 0) {
+			if (xChoice <= 20 && xChoice > 4) {
 				xMaxValid = true;
 			}
 			else {
-				console.log("\n   Veuillez rentrer une taille X entre 0 et 20");
+				console.log("\n   Veuillez rentrer une taille X entre 5 et 20");
 			}
 		}
 		while (!yMaxValid) { //Vérification du Y compris entre 0 et 20
-			console.log("\n   Taille du tableau axe Y: (entre 1 et 20)");
+			console.log("\n   Taille du tableau axe Y: (entre 5 et 20)");
 			yChoice = scanf('%d');
-			if (yChoice <= 20 && yChoice > 0) {
+			if (yChoice <= 20 && yChoice > 4) {
 				yMaxValid = true;
 			}
 			else {
-				console.log("\n   Veuillez rentrer une taille Y entre 0 et 20");
+				console.log("\n   Veuillez rentrer une taille Y entre 5 et 20");
 			}
 		}
 		//remplissage du tableau de 0
