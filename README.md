@@ -10,7 +10,6 @@ git clone https://github.com/Kev1venteur/demineurNodeJs.git
 Just install NodeJS, go to the root of the project in the powershell and launch the game with ```node Demineur.js```.
 
 ## How to contribute
-
 Just send a pull-request 😉
 
 ## Auteur
