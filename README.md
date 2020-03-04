@@ -1,5 +1,5 @@
 # demineurNodeJs
-Projet démineur B2 en powershell octobre 2019 avec Julien Carre.
+Console Minesweeper project made in October 2019 with Julien Carre.
 
 ## How to Start
 ```
