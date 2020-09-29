@@ -1,4 +1,4 @@
-# demineurNodeJs
+# DemineurNodeJs
 Console Minesweeper project made in October 2019 with Julien Carre.
 
 ## How to Start
